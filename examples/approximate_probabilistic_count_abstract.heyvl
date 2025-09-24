@@ -1,0 +1,26 @@
+// RUN: @caesar @file
+
+domain Exponentials {
+    func exp(base: UReal, exponent: UInt): UReal = ite(exponent == 0, 1, base * exp(base, exponent - 1))
+}
+
+@wp
+coproc approximate_probabilistic_count(N: UInt) -> (k: UInt)
+    pre N + 1
+    post k
+{
+    k = 1
+    var n: UInt = 0
+    assert !?(((0 <= n) && (n <= N)))
+    var prob_choice: Bool
+    @invariant(k + N - n)
+    while n != N {
+        prob_choice = flip(1/k)
+        if prob_choice {
+            k = 2 * k
+            n = n + 1
+        } else {
+            n = n + 1
+        }
+    }
+}

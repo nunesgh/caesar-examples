@@ -1,0 +1,43 @@
+// RUN: @caesar @file
+
+@ert
+coproc entanglement(p: UReal, q: UReal, C: UInt) -> (N: UInt, M: UInt)
+    post N + M
+{
+    var c: UInt = 2
+    var m: UInt = 0
+    var n: UInt = 0
+    var prob_choice: Bool
+    assert !?((0 <= c) && (c <= 2))
+    @invariant((((1 + 2 * (1 - p)) / (1 - (1 - p) * (1 - p))) + 1) * (1 / (1 - q)))
+    while (c == 2) {
+        @invariant((1 + 2 * (1 - p)) / (1 - (1 - p) * (1 - p)))
+        while (c > 0) {
+            if (c == 2) {
+                prob_choice = flip(2 * p * (1 - p))
+                if prob_choice {
+                    c = 1
+                } else {
+                    prob_choice = flip((p * p) / (1 - 2 * p * (1 - p)))
+                    if prob_choice {
+                        c = 0
+                    } else {}
+                }
+            } else {}
+            if (c == 1) {
+                prob_choice = flip(p)
+                if prob_choice {
+                    c = 0
+                } else {}
+            } else {}
+            n = n + 1
+        }
+        prob_choice = flip(q)
+        if prob_choice {
+            c = 2
+        } else {}
+        m = m + 1
+    }
+    M = m
+    N = n
+}

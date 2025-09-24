@@ -1,0 +1,18 @@
+// RUN: @caesar @file
+
+@wlp
+proc unbiasing(prob: UReal) -> (x: UInt)
+    pre 0.5
+    post [x == 0]
+{
+    x = 0
+    var y: UInt = 0
+    var prob_choice: Bool
+    @invariant([x == 0 && y == 1] + [x == y] * 0.5)
+    while x == y {
+        prob_choice = flip(prob)
+        x = ite(prob_choice, 0, 1)
+        prob_choice = flip(prob)
+        y = ite(prob_choice, 0, 1)
+    }
+}

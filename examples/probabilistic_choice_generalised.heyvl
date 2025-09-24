@@ -1,0 +1,14 @@
+// RUN: @caesar @file
+
+@wlp
+proc probabilistic_choice(y: Int, prob: UReal) -> (x: Int)
+    pre [y < 0] * prob + [y == 0] + [y > 0] * (1 - prob)
+    post [x >= 0]
+{
+    var prob_choice: Bool = flip(prob)
+    if prob_choice {
+        x = 0 - y
+    } else {
+        x = y
+    }
+}

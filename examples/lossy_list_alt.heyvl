@@ -1,0 +1,30 @@
+// RUN: @caesar @file
+
+domain Exponentials {
+    func exp(base: UReal, exponent: UInt): UReal
+    axiom exp_base forall base: UReal. exp(base, 0) == 1
+    axiom exp_step forall base: UReal, exponent: UInt @trigger(exp(base, exponent + 1)). exp(base, exponent + 1) == base * exp(base, exponent)
+}
+
+domain List {
+    func len(l: List): UInt
+    func pop(l: List): List
+    axiom list_pop forall l: List. len(pop(l)) == len(l) - 1
+}
+
+@wlp
+proc lossy_list_alt(init_l: List, init_len: UInt, prob: UReal) -> (l: List)
+    pre [len(init_l) == init_len] * exp(prob, init_len)
+    post [true]
+{
+    l = init_l
+    @invariant(exp(prob, len(l)))
+    while len(l) > 0 {
+        var prob_choice: Bool = flip(prob)
+        if prob_choice {
+            l = pop(l)
+        } else {
+            assert [false]
+        }
+    }
+}
