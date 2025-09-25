@@ -1,5 +1,7 @@
 # Caesar Examples
 
+Examples for [Caesar](https://github.com/moves-rwth/caesar), a deductive verification infrastructure for probabilistic programs.
+
 ## Lossy List
 
 As per [Caesar's Guide to HeyVL](https://www.caesarverifier.org/docs/getting-started/heyvl-guide\#full-example).
