@@ -6,85 +6,30 @@ As per [Caesar's Guide to HeyVL](https://www.caesarverifier.org/docs/getting-sta
 
 ## Probabilistic Choice
 
-```
-$x = -y\ {_{p}}{\oplus}\ x = +y$
-```
+<img width="275" height="48" alt="Probabilistic Choice" src="https://github.com/user-attachments/assets/9a91de77-3d32-43f0-b153-41dc5bafab9b" />
 
 ## Approximate Probabilistic Counting
 
 Abstract counting.
 
-```
-$\{ N + 1 \}$
-
-VAR $k, n = 1, 0$
-WHILE $n != N$:
-    $k = 2k\ {_{\frac{1}{2}}}{\oplus}\ \text{SKIP}$
-    $n = n + 1$
-
-$\{ k \}$
-```
+<img width="285" height="230" alt="Abstract Approximate Probabilistic Counting" src="https://github.com/user-attachments/assets/c18d107c-6fb6-40d5-9ab0-1e08b85e1534" />
 
 Concrete counting.
 
-```
-$\{ N + 1 \}$
-
-VAR $c, n = 0, 0$
-WHILE $n != N$:
-    $c = c + 1\ {_{(\frac{1}{2})^c}}{\oplus}\ \text{SKIP}$
-    $n = n + 1$
-
-$\{ 2^c \}$
-```
+<img width="340" height="230" alt="Concrete Approximate Probabilistic Counting" src="https://github.com/user-attachments/assets/0b00d485-df81-4ce9-aa5a-36d5289045cd" />
 
 ## Unbiasing
 
 Unbiased coin flip from biased coin flips.
 
-```
-$\{ \frac{1}{2} \}$
-
-VAR $x, y = 0, 0$
-WHILE $x == y$:
-    $x = 0\ {_{p}}{\oplus}\ 1$
-    $y = 0\ {_{p}}{\oplus}\ 1$
-
-$\{ [x == 0] \}$
-```
+<img width="260" height="225" alt="Unbiasing" src="https://github.com/user-attachments/assets/b7b5027b-f409-4fd7-b28f-182e0f0330f7" />
 
 Alternative version using non-deterministic (demonic) choice for $p$.
 
-```
-$\{ \frac{1}{2} \}$
-
-VAR $x, y = 0, 0$
-WHILE $x == y$:
-    $p \in \{ \text{values} \}$
-    $x = 0\ {_{p}}{\oplus}\ 1$
-    $y = 0\ {_{p}}{\oplus}\ 1$
-
-$\{ [x == 0] \}$
-```
+<img width="260" height="255" alt="Demonic Unbiasing" src="https://github.com/user-attachments/assets/3d99b711-6f8b-405c-bfd6-563ebe7e872f" />
 
 ## Quantum Entanglement
 
 Delivery model of two entangled qbits transformed as a random walk program.
 
-```
-${T'(c)}$
-
-VAR $c = 2$
-VAR $n, m = 0, 0$
-WHILE $c == 2$:
-    WHILE $c > 0$:
-        IF $c == 2$:
-            $c = 1\ @\ 2p(1-p), c = 0\ @\ p^2, \text{SKIP}\ @\ (1 - p)^2$
-        IF $c == 1$:
-            $c = 0\ {_{p}}{\oplus}\ \text{SKIP}$
-        $n = n + 1$
-    $c = 2\ {_{q}}{\oplus}\ \text{SKIP}$
-    $m = m + 1$
-
-$\{ n + m \}$
-```
+<img width="710" height="488" alt="Quantum Entanglement" src="https://github.com/user-attachments/assets/04a510cc-e19b-46ef-930b-5e625003d97b" />
